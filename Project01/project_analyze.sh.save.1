@@ -29,23 +29,23 @@ TODO(){
 #3 find error files and put them into compile_fail.log
 Find_error(){
 	hs_file=$(find . -iname "*.hs" -type f)
-	echo -e "${PURPLE}This is what we get when running the haskell file${RESTORE}"
-	ghc $hs_file	
-	if [ $? -eq 0 ] ; then
-		echo -e "${BLUE}This haskell file is executable${RESTORE}"
+	echo -E "${PURPLE}This is what we get when running the haskell file${RESTORE}"
+	runhaskell $hs_file	
+	if [  -eq 0 ] ; then
+	echo "${BLUE}This haskell file is executable${RESTORE}"
 	else
-		echo -e "${RED}It is not executable,added to compile_fail.log${RESTORE}"
+	echo "${RED}It is not executable,added to compile_fail.log${RESTORE}"
 	for f in $hs_file ; do
 		echo "$hs_file" > Project01/logs/compile_fail.log
 	done
 	fi
 	py_file=$(find . -iname "*.py" -type f)
-	echo -e "${PURPLE}This is what we get when running the python file${RESTORE}"
+	echo "${PURPLE}This is what we get when running the python file${RESTORE}"
         python $py_file     
         if [ $? -eq 0 ] ; then
-       		echo -e "${BLUE}This python file is executable${RESTORE}"
+        echo "${BLUE}This python file is executable${RESTORE}"
         else
-       		echo -e "${RED}It is not executable,added to compile_fail.log${RESTORE}"
+        echo "${RED}It is not executable,added to compile_fail.log${RESTORE}"
         for f in $py_file ; do
                 echo "$py_file" > Project01/logs/compile_fail.log
         done
@@ -62,7 +62,7 @@ Find_error(){
 Find_merge(){
 	git log --all --oneline | grep "merge" > Project01/logs/tempfile.txt
 	cut -d " " -f1  Project01/logs/tempfile.txt  > Project01/logs/merge.log
-	echo -e "${BLUE}Commit hashes of commit message with merge has been added to merge.log${RESTORE}"
+	echo "${BLUE}Commit hashes of commit message with merge has been added to merge.log${RESTORE}"
 	read -p "Would you like to see the log?(Y/N)" choice 
         if [ "$choice" = "Y" ] ; then  
         	cat Project01/logs/merge.log 
@@ -76,15 +76,15 @@ Find_merge(){
 #5. count how many of each files exist
 File_count(){
 	html=$(find . -iname "*.html" |wc -l)
-	echo "HTML:$html"
+	echo "${BLUE}HTML:$html${RESTORE}"
 	java=$(find . -iname "*.js" |wc -l)
-	echo "Javascript:$java"
+	echo "${BLUE}Javascript:$java${RESTORE}"
 	CSS=$(find . -iname "*.css" |wc -l)
-	echo "CSS:$CSS"
+	echo "${BLUE}CSS:$CSS${RESTORE}"
 	python=$(find . -iname "*.py" |wc -l)
-	echo "Python:$python"
+	echo "${BLUE}Python:$python${RESTORE}"
 	haskell=$(find . -iname "*.hs" |wc -l)
-	echo "Haskell:$haskell"
+	echo "${BLUE}Haskell:$haskell${RESTORE}"
 	read -p "Do you want to execute next function(Del_tem)?(Y/N)" choice
         if  [ "$choice" = "Y" ] ; then  
                 Del_tem
@@ -97,7 +97,7 @@ Del_tem(){
 	for item in $untracked ; do
 		rm $item
 	done
-	echo -e "${BLUE}Temporary files have been deleted${RESTORE}"
+	echo "${BLUE}Temporary files have been deleted${RESTORE}"
 	read -p "Do you want to execute next function(Mac_runtime)?(Y/N)" choice2
         if  [ "$choice2" = "Y" ] ; then  
                 Mac_runtime
@@ -121,12 +121,12 @@ Get_time(){
 	if [ "$choice" = "Y" ] ; then  
                 Get_time 
         fi 
-	echo -e "${BLINK}This is the end of project01${RESTORE}"
+	echo "This is the end of project01"
 }
 
 
 #make the script interactive
-read -p  "choose the feature to be executed a)TODO b)Find_error c)Find_merge d)File_count e)Del_tem f)Mac_runtime g)Get_time " var1
+read -p  "choose the feature to be executed 1)TODO 2)Find_error 3)Find_merge 4)File_count 5)Del_tem 6)Mac_runtime 7)Get_time " var1
 
 if [ "$var1" = "TODO" ] ; then 
 	TODO
@@ -143,5 +143,5 @@ elif [ "$var1" = "Mac_runtime" ] ; then
 elif [ "$var1" = "Get_time" ] ; then
         Get_time
 else
-	echo -e "${RED}Sorry, your command cannot be found${RESTORE}"
+	echo "Sorry, your command cannot be found, please try again"
 fi
