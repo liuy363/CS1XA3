@@ -77,11 +77,11 @@ init _ =
 -}
 
 
-performPost : Cmd Msg
-performPost =
+performPost : Model -> Cmd Msg
+performPost model =
     Http.post
         { url = "https://mac1xa3.ca/e/liuy363/lab7/"
-        , body = Http.stringBody "application/x-www-form-urlencoded" "name=Name&age=Age"
+        , body = Http.stringBody "application/x-www-form-urlencoded" ("name="++ model.name++"&password=" ++ model.password ++ "&passwordAgain=" ++ model.passwordAgain)
         , expect = Http.expectString PostResponse
         }
 
@@ -108,7 +108,7 @@ update msg model =
 
        
         PostButton ->
-            ( model, performPost )
+            ( model, performPost model)
 
 
 

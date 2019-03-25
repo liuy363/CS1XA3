@@ -9,7 +9,5 @@ def post_vars(request):
 
     if name == "Jimmy" and password == "Hendrix":
         return HttpResponse("Cool")
-    elif name == "a" :
-        return HttpResponse("yes")
     else:
         return HttpResponse("Bad User Name") 

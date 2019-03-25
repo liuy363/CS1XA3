@@ -5883,12 +5883,14 @@ var elm$http$Http$post = function (r) {
 		{body: r.body, expect: r.expect, headers: _List_Nil, method: 'POST', timeout: elm$core$Maybe$Nothing, tracker: elm$core$Maybe$Nothing, url: r.url});
 };
 var elm$http$Http$stringBody = _Http_pair;
-var author$project$Lab7$performPost = elm$http$Http$post(
-	{
-		body: A2(elm$http$Http$stringBody, 'application/x-www-form-urlencoded', 'name=Name&age=Age'),
-		expect: elm$http$Http$expectString(author$project$Lab7$PostResponse),
-		url: 'https://mac1xa3.ca/e/liuy363/lab7/'
-	});
+var author$project$Lab7$performPost = function (model) {
+	return elm$http$Http$post(
+		{
+			body: A2(elm$http$Http$stringBody, 'application/x-www-form-urlencoded', 'name=' + (model.name + ('&password=' + (model.password + ('&passwordAgain=' + model.passwordAgain))))),
+			expect: elm$http$Http$expectString(author$project$Lab7$PostResponse),
+			url: 'https://mac1xa3.ca/e/liuy363/lab7/'
+		});
+};
 var author$project$Lab7$update = F2(
 	function (msg, model) {
 		switch (msg.$) {
@@ -5929,7 +5931,9 @@ var author$project$Lab7$update = F2(
 						elm$core$Platform$Cmd$none);
 				}
 			default:
-				return _Utils_Tuple2(model, author$project$Lab7$performPost);
+				return _Utils_Tuple2(
+					model,
+					author$project$Lab7$performPost(model));
 		}
 	});
 var author$project$Lab7$Name = function (a) {
