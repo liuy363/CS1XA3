@@ -15,14 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from django.http import HttpResponse
 
-def hello_world(request):
-    html = "<html><body>Hello World</body></html>"
-    return HttpResponse(html)
 
-root_path = 'e/liuy363/' 
+
 urlpatterns = [
-    path(root_path, include("helloapp.urls")),
+    path('e/liuy363/lab7/', include('lab7.urls')),
 ]
-
