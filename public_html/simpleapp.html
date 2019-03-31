@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>Memory Game</title>
+  <h1 class="header">Taylor & Maclaurin Series</h1>
+  <h2 class="subheader">Have fun reviewing math :)</h2>
+  
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+  <button class="button button1" id="start" onclick="timer()">START</button>
+  <button class="button button2" id="reset" onclick="timer()">RESET</button>
+  <p class="timer" id="timer">   Timer : </p>
+  <p class="over" id="over" onclick="hide()">Game Over</p>
+  <p class="gameover" id="gameover" onclick="hide()">Game Over</p>
+  <div class="text" id="text"><p1 onclick="hide()">* Click anywhere *</p1></div>
+
+  <div class="intro">
+    <p2>Good to know before start:</h2>
+  </div>
+  <div class="rules"><p2>
+    1.Click start to start timing<br/>
+    2.Try to match Maulaurin Seires with the function(always click the series first)<br/>
+    3.If you match the correct one, the whole function will be shown underneath, you can click the button to see the detailed proof, which will lead you to another website.<br/>
+    4.After seeing the "game over", you can click anywhere to exit the state or click reset to start all over again.<br/>
+
+  </p2></div>
+  <div class="proof cos" id="cos">
+    
+      <a href="https://www.khanacademy.org/math/ap-calculus-bc/bc-series-new/bc-10-14/v/cosine-taylor-series-at-0-maclaurin"><p>Click to see detailed proof</p></a>
+
+      <img src="img/cos.png" height="100px" width="300px">
+  
+    </div>
+
+  <div class="proof sin" id="sin">
+  
+      <a href="https://www.khanacademy.org/math/ap-calculus-bc/bc-series-new/bc-10-14/v/sine-taylor-series-at-0-maclaurin"><p>Click to see detailed proof</p></a>
+      
+      <img src="img/sin.png" height="100px" width="320px">
+  
+    </div>
+
+  <div class="proof exp" id="exp">
+  
+      <a href="https://www.khanacademy.org/math/ap-calculus-bc/bc-series-new/bc-10-14/v/taylor-series-at-0-maclaurin-for-e-to-the-x"><p>Click to see detailed proof</p></a>
+
+      <img src="img/exp.png" height="100px" width="300px">
+  
+    </div>
+
+  <div class="proof x" id="x">
+    
+    <a href="https://www.symbolab.com/solver/taylor-maclaurin-series-calculator/taylor%20%5Cfrac%7B1%7D%7B1-x%7D%2C%200?or=ex"><p>Click to see detailed proof</p></a>
+    
+    <img src="img/1-x.png" height="100px" width="320px">
+
+  </div>
+
+  <div class="proof ln" id="ln">
+
+    <a href="https://www.youtube.com/watch?v=lRTqJp4sWpU"><p>Click to see detailed proof</p></a>
+   
+    <img src="img/ln.png" height="100px" width="350px">
+    
+  </div>
+  
+  <div class="proof arctan" id="arctan">
+
+    <a href="https://www.youtube.com/watch?v=DmLcMZOvFBc"><p>Click to see detailed proof</p></a>
+
+    <img src="img/arctan.png" height="100px" width="350px">
+
+  </div>
+
+
+  <div id="game"></div>
+
+  <script src="project2.js"></script>
+</body>
