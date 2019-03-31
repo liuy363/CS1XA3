@@ -1,7 +1,7 @@
 
 var cardsArray = [ {
     'name' : 'A' ,
-    'img' : 'img/A.png',
+    'img' : '~/CS1XA3/public_html/project2/img/A.png',
 }, {'name' : 'Ac' ,
     'img' : 'img/Ac.png',
 }, {'name' : 'B' ,
@@ -25,7 +25,7 @@ var cardsArray = [ {
 }, {'name' : 'Fc' ,
     'img' : 'img/Fc.png',
 },]
-var soundeffect1 = new Audio("sound/1.mp3")
+var soundeffect1 = new Audio("project2/sound/1.mp3")
 var soundeffect2 = new Audio("sound/2.mp3")
 var soundeffect3 = new Audio("sound/3.mp3")
 var soundeffect4 = new Audio("sound/4.mp3")
