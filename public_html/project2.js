@@ -1,34 +1,34 @@
 
 var cardsArray = [ {
     'name' : 'A' ,
-    'img' : '~/CS1XA3/public_html/project2/img/A.png',
+    'img' : 'project2/img/A.png',
 }, {'name' : 'Ac' ,
-    'img' : 'img/Ac.png',
+    'img' : 'project2/img/Ac.png',
 }, {'name' : 'B' ,
-    'img' : 'img/B.png',
+    'img' : 'project2/img/B.png',
 }, {'name' : 'Bc' ,
-    'img' : 'img/Bc.png',
+    'img' : 'project2/img/Bc.png',
 }, {'name' : 'C' ,
-    'img' : 'img/C.png',
+    'img' : 'project2/img/C.png',
 }, {'name' : 'Cc' ,
-    'img' : 'img/Cc.png',
+    'img' : 'project2/img/Cc.png',
 }, {'name' : 'D' ,
-    'img' : 'img/D.png',
+    'img' : 'project2/img/D.png',
 }, {'name' : 'Dc' ,
-    'img' : 'img/Dc.png',
+    'img' : 'project2/img/Dc.png',
 }, {'name' : 'E' ,
-    'img' : 'img/E.png',
+    'img' : 'project2/img/E.png',
 }, {'name' : 'Ec' ,
-    'img' : 'img/Ec.png',
+    'img' : 'project2/img/Ec.png',
 }, {'name' : 'F' ,
-    'img' : 'img/F.png'
+    'img' : 'project2/img/F.png'
 }, {'name' : 'Fc' ,
-    'img' : 'img/Fc.png',
+    'img' : 'project2/img/Fc.png',
 },]
 var soundeffect1 = new Audio("project2/sound/1.mp3")
-var soundeffect2 = new Audio("sound/2.mp3")
-var soundeffect3 = new Audio("sound/3.mp3")
-var soundeffect4 = new Audio("sound/4.mp3")
+var soundeffect2 = new Audio("project2/sound/2.mp3")
+var soundeffect3 = new Audio("project2/sound/3.mp3")
+var soundeffect4 = new Audio("project2/sound/4.mp3")
 
 
 var count = 0
@@ -48,13 +48,13 @@ grid.setAttribute('class', 'grid');
 game.appendChild(grid);
 
 //////////////////show image//////////////////////
-gameGrid.forEach(function (item) {
-  var card = document.createElement('div');
-  card.classList.add('card');
-  card.dataset.name = item.name;
-  card.style.backgroundImage = 'url(${item.img})';
-  grid.appendChild(card);
-});
+cardsArray.forEach(item =>  {
+  const card = document.createElement('div')
+  card.classList.add('card')
+  card.dataset.name = item.name
+  card.style.backgroundImage = `url(${item.img})`
+  grid.appendChild(card)
+})
 
 //////////////////main function memorize//////////////
 grid.addEventListener('click', memorize); 
