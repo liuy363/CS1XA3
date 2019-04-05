@@ -1,15 +1,15 @@
-#Project2
+# Project2
 
-##The SimpleWebapp
+## The SimpleWebapp
 
 This webapp is designed to review for Taylor&Maclaurin series. 
 
 The inspiration comes from the experience of trying to memorize these formulas before test but feel bored just memorize them.
 
 
-##How to play
+## How to play
 
-###Good to know before start: 
+### Good to know before start: 
 
 1.Click start to start timing
 
@@ -24,7 +24,7 @@ The inspiration comes from the experience of trying to memorize these formulas b
 
 
 
-##Reference:
+## Reference:
 
 webpage layout: https://www.free-css.com/free-css-templates/page224/folio
 
