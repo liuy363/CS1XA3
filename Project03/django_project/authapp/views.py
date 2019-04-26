@@ -1,43 +1,39 @@
 from django.shortcuts import render
-
-# Create your views here.
-from django.shortcuts import render,redirect
+from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from authapp.models import Score
-#from authapp.forms import ScoreForm
+from authapp.models import UserInfo
 from django import forms
 from django.http import HttpResponse, HttpResponseRedirect
 
 import json
 
-# Create your views here.
+
+
 def mainpage(request):
     return HttpResponseRedirect("https://mac1xa3.ca/u/liuy363/project3.html")
 
 
 
 def userlogin(request):
-    print('fda')
+   
     json_req = json.loads(request.body.decode('utf-8'))
     username = json_req.get('username','')
     password = json_req.get('password','')
     if request.method == 'POST':
-        print('safdfgfs')
+        
         user = authenticate(request, username=username, password=password)
-        print('hereeeeee')
+        
         if user is None:
-            print('whattt')
+            
             return HttpResponse('LoginFailed')
         else:
-            print('??????')
             login(request, user)
-            return HttpResponseRedirect("https://mac1xa3.ca/u/liuy363/clientside.html")  #####to the game page  
+            return HttpResponse('Success! Hello ' )
 
     else:
-        print('nonono')
-        return HttpResponseRedirect("https://mac1xa3.ca/u/liuy363/login.html") ####TODO
+        return HttpResponseRedirect("https://mac1xa3.ca/u/liuy363/login.html")
 
 
 def userlogout(request):
@@ -46,7 +42,6 @@ def userlogout(request):
 
 
 def adduser(request):
-    print('11')
     json_req = json.loads(request.body.decode('utf-8'))
     username = json_req.get('username','')
     password = json_req.get('password','')
@@ -54,7 +49,7 @@ def adduser(request):
     if username != '':
         user = User.objects.create_user(username=username,
                                         password=password)
-
+        userinfo=UserInfo.objects.create(user=user)
         login(request,user)
         return HttpResponse('LoggedIn')
 
@@ -63,12 +58,11 @@ def adduser(request):
 
 
 def user_info(request):
-    """serves content that is only available to a logged in user"""
-
     if not request.user.is_authenticated:
         return HttpResponse("LoggedOut")
     else:
-        # do something only a logged in user can do
+        user=request.user
+        userinfo=UserInfo.objects.get(user=user)
         return HttpResponse("Hello " + request.user.username)
 
 
@@ -77,16 +71,38 @@ def user_info(request):
 
 
 def myscore(request):
-    print('heresdfdsadfdgssasdafeejdsk')
     if request.method == 'POST':
-        score_data = json.loads(request.body)
+        score_data = json.loads(request.body.decode('utf-8'))
         print(str(score_data))
-
-        return HttpResponse (str(score_data))
+        #s=score_data[0]
+        #a=score_data[1]
+        score=score_data.get('score',0)
+        #time=a['time']
+        #print(str(time))
+        user = request.user
+        if user.is_authenticated:
+            
+            userinfo=UserInfo.objects.get(user=user)
+            #userinfo.time=time
+            #userinfo.save()
+            if score>userinfo.score:
+               
+               userinfo.score=score
+               userinfo.save()
+               print(str(score_data))
+               return HttpResponse('score updated')
+            else:
+               return HttpResponse('Not higher than highest')
+        else:
+            return HttpResponse("user not authenticated")
     
     else:
-        return HttpResponse ('nottttt')
+        return HttpResponse('fail to post')
 
 
-
-
+def getscore(request):
+   res=''
+   qs=UserInfo.objects.order_by('score')
+   for elt in qs:
+     res += elt.name + '<br>'
+   return HttpResponse(res)
