@@ -1,4 +1,4 @@
-module Login exposing (main)
+module Signup exposing (main)
 
 import Browser
 import Browser.Navigation exposing (load)
@@ -9,17 +9,6 @@ import Http
 import Json.Decode as JDecode
 import Json.Encode as JEncode
 import String
-
-
-
--- TODO adjust rootUrl as needed
-
-
---rootUrl ="http://localhost:8000/e/macid/"
-
-
-
-rootUrl = "https://mac1xa3.ca/e/liuy363/"
 
 
 main =
@@ -45,8 +34,8 @@ type alias Model =
 type Msg
     = NewName String -- Name text field changed
     | NewPassword String -- Password text field changed
-    | GotLoginResponse (Result Http.Error String) -- Http Post Response Received
-    | LoginButton -- Login Button Pressed
+    | GotSignupResponse (Result Http.Error String) -- Http Post Response Received
+    | SignupButton -- Signup Button Pressed
 
 
 init : () -> ( Model, Cmd Msg )
@@ -74,7 +63,7 @@ view model =
             , viewInput "password" "Password" model.password NewPassword
             ]
         , div []
-            [ button [ Events.onClick LoginButton ] [ text "Login" ]
+            [ button [ Events.onClick SignupButton ] [ text "Signup" ]
             , text model.error
             ]
         ]
@@ -109,9 +98,9 @@ passwordEncoder model =
 loginPost : Model -> Cmd Msg
 loginPost model =
     Http.post
-        { url = "https://mac1xa3.ca/e/liuy363/userlogin/"
+        { url = "https://mac1xa3.ca/e/liuy363/adduser/"
         , body = Http.jsonBody <| passwordEncoder model
-        , expect = Http.expectString GotLoginResponse
+        , expect = Http.expectString GotSignupResponse
         }
 
 
@@ -134,15 +123,13 @@ update msg model =
         NewPassword password ->
             ( { model | password = password }, Cmd.none )
 
-        LoginButton ->
+        SignupButton ->
             ( model, loginPost model )
 
-        GotLoginResponse result ->
+        GotSignupResponse result ->
             case result of
-                Ok "LoginFailed" ->
-                    ( { model | error = "failed to login" }, Cmd.none )
-
-                Ok _ ->
+                
+                Ok "LoggedIn" ->
                     ( model, load ("https://mac1xa3.ca/u/liuy363/clientside.html") )
 
                 Err error ->
